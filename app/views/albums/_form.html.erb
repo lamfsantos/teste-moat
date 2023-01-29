@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :artist, style: "display: block" %>
-    <%= form.text_field :artist %>
+    <%= form.select :artist, @list_of_artists.collect {|a| [ a.name, a.id ] } %>
   </div>
 
   <div>
@@ -30,10 +30,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-
-<%= @list_of_artists %>
-
-<div>
-  album_name empty? <%= !@album.album_name? %> 
-</div>

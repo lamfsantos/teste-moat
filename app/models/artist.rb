@@ -1,5 +1,5 @@
 class Artist
-	include ActiveModel: :Model
+	#include ActiveModel: :Model
 
 	attr_accessor :id, :twitter, :name
 end

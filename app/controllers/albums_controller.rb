@@ -20,6 +20,7 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
+    @list_of_artists = get_list_of_artists
   end
 
   # POST /albums or /albums.json

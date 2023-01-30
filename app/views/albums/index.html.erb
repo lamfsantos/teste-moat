@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<!-- <p style="color: green"><%= notice %></p>
 
 <h1>Albums</h1>
 
@@ -12,3 +12,56 @@
 </div>
 
 <%= link_to "New album", new_album_path %>
+ -->
+
+
+ <div class="row">
+  <div class="col-xs-12 text-center">
+    <h1>My albums</h1>
+  </div>
+
+  <div class="col-md-8 col-md-offset-2 col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Artist</th>
+          <th>Album Name</th>
+          <th>Year</th>
+          <th colspan="2">
+            Ações
+            <%= link_to 'New album', new_album_path(current_user), class: 'btn btn-success', style: 'margin-left: 50px'  %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @albums.empty? %>
+          <tr>
+            <td colspan="4" class="text-center">
+              <h3>No albums do show.</h3>
+              <%= link_to 'Click here', new_album_path(current_user) %> to register a new album
+            </td>
+          </tr>
+        <% end %>
+        <% @albums.each do |c| %>
+        <tr>
+          <td>
+            <%= c.artist %>
+          </td>
+          <td>
+            <%= c.album_name %>
+          </td>
+          <td>
+            <%= c.year %>
+          </td>
+          <td>
+            <%= link_to 'Edit', edit_album_path(c, current_user), class: 'btn btn-warning' %>
+          </td>
+          <td>
+            <%= link_to 'Delete', album_path(c, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

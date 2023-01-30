@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(username: params[:session][:username].downcase)
 	    if user && user.authenticate(params[:session][:password])
 			sign_in(user)
-			redirect_to user_path(user)
+			redirect_to albums_path(user)
 	    else
 			flash.now[:danger] = "Sorry, we couldn't find an account with this username. Please check you're using the right username and try again"
 			render 'new'

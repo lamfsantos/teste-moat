@@ -6,7 +6,7 @@ class User < ApplicationRecord
 	validates :password, length: {minimum: 6}
 	validates :role, presence: true
 
-	has_many :contacts
+	has_many :albums
 	#belongs_to :role
 
 end

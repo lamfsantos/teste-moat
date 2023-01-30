@@ -1,0 +1,25 @@
+
+<div class="form-group">
+	<%= f.label :full_name %>
+	<%= f.text_field :full_name, class: 'form-control'%>
+</div>
+	
+<div class="form-group">
+	<%= f.label :username %>
+	<%= f.text_field :username, class: 'form-control'%>
+</div>
+
+<div class="form-group">
+	<%= f.label :password %>
+	<%= f.password_field :password, class: 'form-control'%>
+</div>
+
+<div class="form-group" >
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation, class: 'form-control'%>
+</div>
+
+<div class="form-group">
+	<%= f.label :role %>
+	<%= f.select :role, @roles.collect {|a| [ a.description, a.id ]},{}, class: 'form-control' %>
+</div>

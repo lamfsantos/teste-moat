@@ -1,9 +1,10 @@
 class AlbumsController < ApplicationController
+  before_action :require_logged_in_user 
   before_action :set_album, only: %i[ show edit update destroy ]
 
   # GET /albums or /albums.json
   def index
-    @albums = Album.all
+    @albums = current_user.albums
   end
 
   # GET /albums/1 or /albums/1.json
@@ -23,7 +24,7 @@ class AlbumsController < ApplicationController
 
   # POST /albums or /albums.json
   def create
-    @album = Album.new(album_params)
+    @album = current_user.albums.build(album_params)
 
     respond_to do |format|
       if @album.save
@@ -67,7 +68,7 @@ class AlbumsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
-      @album = Album.find(params[:id])
+      @album = current_user.albums.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

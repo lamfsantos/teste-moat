@@ -7,5 +7,6 @@ class User < ApplicationRecord
 	validates :role, presence: true
 
 	has_many :contacts
-	belongs_to :role
+	#belongs_to :role
+
 end

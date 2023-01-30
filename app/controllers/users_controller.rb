@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	
-
 	def new
 		@user = User.new
 
@@ -8,9 +7,11 @@ class UsersController < ApplicationController
 	end
 
 	def create
+		#user_params['role'] = set_role_on_new_user(user_params, get_roles)
+
 		@user = User.new(user_params)
 		@roles = get_roles
-
+		
 		if @user.save
 			flash[:success] = 'User registered.'
 			redirect_to root_url
@@ -26,6 +27,27 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:full_name, :username, :password, :password_confimration, :role)
+			params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :role)
+		end
+
+	private
+		def set_role_on_new_user(user_params, roles)
+			role = nil
+			roles = Role.all.order('id ASC').to_a.map {|u| u } 
+
+			i = 0
+			loop { 
+				if roles[i]['id'].to_s  == user_params['role']
+					role = roles[i]
+				end
+
+				if i == roles.size - 1
+					break
+				end
+
+				i+=1
+			}
+
+			role
 		end
 end

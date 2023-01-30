@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 		def require_logged_in_user
 			unless user_signed_in?
 				flash[:danger] = 'Restricted area. Please log in.'
-				redirect_to entrar_path
+				redirect_to root_path
 			end
 		end
 end

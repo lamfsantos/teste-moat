@@ -1,3 +1,5 @@
 class Role < ApplicationRecord
-	has_many :users
+	# has_many :user
+
+	# accepts_nested_attributes_for :user
 end

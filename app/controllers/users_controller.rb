@@ -25,6 +25,19 @@ class UsersController < ApplicationController
 		roles_controller.get_all
 	end
 
+	def edit
+		@roles = get_roles
+	end
+
+	def update
+		if current_user.update(user_params)
+			flash[:success] = 'Updated'
+			redirect_to albums_url
+		else
+			render 'edit'
+		end
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :role)

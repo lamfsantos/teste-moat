@@ -39,18 +39,17 @@ class ArtistsController < ApplicationController
 		artist.id = artist_hash['id']
 		artist.twitter = artist_hash['twitter']
 		artist.name = artist_hash['name']
-		
+
 		artist
 	end
 
 	def request_json_artists
-		url = URI("https://europe-west1-madesimplegroup-151616.cloudfunctions.net/artists-api-controller")
-
+		url = URI(ENV['GET_ARTISTS_URL'])
 	    https = Net::HTTP.new(url.host, url.port)
 	    https.use_ssl = true
 
 	    request = Net::HTTP::Get.new(url)
-	    request["Authorization"] = "Basic ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=="
+	    request["Authorization"] = ENV['REQUEST_HEADER']
 
 	    response = https.request(request)
 

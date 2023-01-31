@@ -25,8 +25,7 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   def new
     @album = Album.new
-
-    @artist = get_artist_by_id(params[:artist]) #get_list_of_artists
+    @artist = get_artist_by_id(params[:artist])
   end
 
   # GET /albums/1/edit
@@ -36,7 +35,10 @@ class AlbumsController < ApplicationController
 
   # POST /albums or /albums.json
   def create
-    @album = current_user.albums.build(album_params)
+    form_album = current_user.albums.build(album_params)
+    @album = form_album
+
+    @artist = get_artist_by_id(form_album.artist)
 
     respond_to do |format|
       if @album.save

@@ -3,6 +3,7 @@
  <div class="form-group">
     <%= f.label :artist, style: "display: block" %>
     <%= f.label @artist.name, class: 'form-control', disabled: true %>
+    <%= f.text_field :artist, value: @artist.id, style: 'display: none'  %>
  </div>
 
  <div class="form-group">

@@ -7,11 +7,12 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Artist</th>
           <th>Album Name</th>
           <th>Year</th>
           <th colspan="2">
-            Ações
+            Actions
+          </th>
+          <th>
             <%= link_to 'New album', new_album_path(@artist.id, current_user), class: 'btn btn-success', style: 'margin-left: 50px'  %>
           </th>
         </tr>
@@ -28,9 +29,6 @@
           <% @albums.each do |c| %>
             <tr>
               <td>
-                <%= c.artist %>
-              </td>
-              <td>
                 <%= c.album_name %>
               </td>
               <td>
@@ -42,6 +40,7 @@
               <td>
                 <%= link_to 'Delete', album_path(c, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
               </td>
+              <td></td>
             </tr>
           <% end %>
         <% end %>

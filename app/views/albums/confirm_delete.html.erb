@@ -2,7 +2,7 @@
 	<h1>Delete</h1>
 	<p>Are you sure?</p>
 	<p>
-		<%= button_to 'Delete', delete_album_path(@album_id, current_user),  method: :post, params: {album: @album_id, current_user: current_user, id:@id}, class: 'btn btn-primary btn-lg'%>
+		<%= button_to 'Delete', delete_album_path(@album_id),  method: :post, class: 'btn btn-primary btn-lg'%> #, params: {album: @album_id, current_user: current_user, id:@id}
 		<%= link_to 'Back', show_albums_path(@artist_id, current_user), class: 'btn btn-danger btn-lg'%>
 	</p>
 </div>\

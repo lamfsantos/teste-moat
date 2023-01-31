@@ -1,16 +1,12 @@
 class AlbumsController < ApplicationController
   before_action :require_logged_in_user 
-  before_action :test
   before_action :set_album, only: %i[ show edit update destroy ]
+  before_action :is_admin, only: %i[ destroy ]
 
   #GET /albums or /albums.json
   def index
     @albums = current_user.albums
     @artists = get_artists_by_id(current_user.albums)
-  end
-
-  # GET /albums/1 or /albums/1.json
-  def show
   end
 
   def show_albums
@@ -47,7 +43,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to show_albums_url(@artist.id), notice: "Album was successfully created." }
+        format.html { redirect_to show_albums_url(@artist.id), success: "Album was successfully created." }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,7 +60,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to show_albums_url(artist.id), notice: "Album was successfully updated." }
+        format.html { redirect_to show_albums_url(artist.id), success: "Album was successfully updated." }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -80,7 +76,7 @@ class AlbumsController < ApplicationController
     @album.destroy
     
     respond_to do |format|
-      format.html { redirect_to show_albums_url(artist), notice: "Album was successfully destroyed." }
+      format.html { redirect_to show_albums_url(artist), success: "Album was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -124,7 +120,15 @@ class AlbumsController < ApplicationController
       params.require(:album).permit(:artist, :album_name, :year)
     end
 
-    def test
-      p params
+    def is_admin
+      album = Album.find_by(id: params[:id])
+      artist = get_artist_by_id(album.artist)
+
+      unless current_user.role == 2
+        respond_to do |format|
+          format.html { redirect_to show_albums_url(artist.id), danger: "You don't have access to this functionalty." }
+          format.json { render json: @album.errors, status: :unprocessable_entity }
+        end
+      end
     end
 end

@@ -15,19 +15,18 @@ class AlbumsController < ApplicationController
 
   def show_albums
     request_artist_to_api = get_artist_by_id(params[:artist])
-    p request_artist_to_api
 
     artist = request_artist_to_api.id
-    albums_response = current_user.albums.find_by(artist: artist) 
-    @albums = albums_response || ""
-    @artist_name = request_artist_to_api.name
+    albums_response = current_user.albums.where(artist: artist) 
+    @albums = albums_response || nil
+    @artist= request_artist_to_api
   end
 
   # GET /albums/new
   def new
     @album = Album.new
 
-    @list_of_artists = get_list_of_artists
+    @artist = get_artist_by_id(params[:artist]) #get_list_of_artists
   end
 
   # GET /albums/1/edit

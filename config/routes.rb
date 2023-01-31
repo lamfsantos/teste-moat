@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to:'sessions#destroy'
   #get 'show_albums', to: 'albums#show_albums'
-  get '/show_albums/:artist/:id', to: 'albums#show_albums', as: 'show_albums'
-
+  get '/show_albums/:artist', to: 'albums#show_albums', as: 'show_albums'
+  get '/new/:artist', to: 'albums#new', as: 'new_album'
 
   resources :albums
   resources :artists

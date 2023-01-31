@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 text-center">
-    <h1><%= @artist_name %>'s Albums</h1>
+    <h1><%= @artist.name %>'s Albums</h1>
   </div>
 
   <div class="col-md-8 col-md-offset-2 col-xs-12">
@@ -12,12 +12,12 @@
           <th>Year</th>
           <th colspan="2">
             Ações
-            <%= link_to 'New album', new_album_path(current_user), class: 'btn btn-success', style: 'margin-left: 50px'  %>
+            <%= link_to 'New album', new_album_path(@artist.id, current_user), class: 'btn btn-success', style: 'margin-left: 50px'  %>
           </th>
         </tr>
       </thead>
       <tbody>
-        <% if @albums.empty? %>
+        <% if @albums.nil? %>
           <tr>
             <td colspan="4" class="text-center">
               <h3>No albums do show.</h3>

@@ -43,7 +43,6 @@ class AlbumsController < ApplicationController
   def create
     form_album = current_user.albums.build(album_params)
     @album = form_album
-
     @artist = get_artist_by_id(form_album.artist)
 
     respond_to do |format|
@@ -59,9 +58,13 @@ class AlbumsController < ApplicationController
 
   # PATCH/PUT /albums/1 or /albums/1.json
   def update
+    form_album = current_user.albums.build(album_params)
+    album = form_album
+    artist = get_artist_by_id(form_album.artist)
+
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to album_url(@album), notice: "Album was successfully updated." }
+        format.html { redirect_to show_albums_url(artist.id), notice: "Album was successfully updated." }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -76,9 +79,8 @@ class AlbumsController < ApplicationController
 
     @album.destroy
     
-    #object being destroyed  but the format is accusing nil
     respond_to do |format|
-      format.html { redirect_to albums_url(artist), notice: "Album was successfully destroyed." }
+      format.html { redirect_to show_albums_url(artist), notice: "Album was successfully destroyed." }
       format.json { head :no_content }
     end
   end

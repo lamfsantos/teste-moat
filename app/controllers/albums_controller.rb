@@ -22,6 +22,11 @@ class AlbumsController < ApplicationController
     @artist= request_artist_to_api
   end
 
+  def confirm_delete
+    @album_id = params[:album_id]
+    @artist_id = params[:artist_id]
+  end
+
   # GET /albums/new
   def new
     @album = Album.new
@@ -30,7 +35,6 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
-    #@list_of_artists = get_list_of_artists
     album = Album.find_by(id: params[:id])
     @artist = get_artist_by_id(album.artist)
   end
@@ -44,7 +48,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to album_url(@album), notice: "Album was successfully created." }
+        format.html { redirect_to show_albums_url(@artist.id), notice: "Album was successfully created." }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -68,11 +72,14 @@ class AlbumsController < ApplicationController
 
   # DELETE /albums/1 or /albums/1.json
   def destroy
+    artist = @album.artist
     @album.destroy
 
+
+    #object being destroyed  but the format is accusing nil
     respond_to do |format|
+      format.html { render(:text => "not implemented") }
       format.html { redirect_to albums_url, notice: "Album was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

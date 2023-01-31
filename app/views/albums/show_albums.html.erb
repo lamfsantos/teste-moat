@@ -18,9 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        <% if @albums.nil? %>
+        <% if @albums.empty? %>
           <tr>
-            <td colspan="4" class="text-center">
+            <td colspan="5" class="text-center">
               <h3>No albums do show.</h3>
               <%= link_to 'Click here', new_album_path(current_user) %> to register a new album
             </td>
@@ -38,7 +38,7 @@
                 <%= link_to 'Edit', edit_album_path(c, current_user), class: 'btn btn-warning' %>
               </td>
               <td>
-                <%= link_to 'Delete', album_path(c, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+                <%= link_to 'Delete', confirm_delete_path(@artist.id, c.id, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
               </td>
               <td></td>
             </tr>

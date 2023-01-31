@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 text-center">
-    <h1>My albums</h1>
+    <h1><%= @artist_name %>'s Albums</h1>
   </div>
 
   <div class="col-md-8 col-md-offset-2 col-xs-12">
@@ -24,25 +24,26 @@
               <%= link_to 'Click here', new_album_path(current_user) %> to register a new album
             </td>
           </tr>
-        <% end %>
-        <% @albums.each do |c| %>
-        <tr>
-          <td>
-            <%= c.artist %>
-          </td>
-          <td>
-            <%= c.album_name %>
-          </td>
-          <td>
-            <%= c.year %>
-          </td>
-          <td>
-            <%= link_to 'Edit', edit_album_path(c, current_user), class: 'btn btn-warning' %>
-          </td>
-          <td>
-            <%= link_to 'Delete', album_path(c, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
+        <% else %>
+          <% @albums.each do |c| %>
+            <tr>
+              <td>
+                <%= c.artist %>
+              </td>
+              <td>
+                <%= c.album_name %>
+              </td>
+              <td>
+                <%= c.year %>
+              </td>
+              <td>
+                <%= link_to 'Edit', edit_album_path(c, current_user), class: 'btn btn-warning' %>
+              </td>
+              <td>
+                <%= link_to 'Delete', album_path(c, current_user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

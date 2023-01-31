@@ -1,14 +1,26 @@
 class AlbumsController < ApplicationController
   before_action :require_logged_in_user 
+  before_action :test
   before_action :set_album, only: %i[ show edit update destroy ]
 
-  # GET /albums or /albums.json
+  #GET /albums or /albums.json
   def index
     @albums = current_user.albums
+    @artists = get_artists_by_id(current_user.albums)
   end
 
   # GET /albums/1 or /albums/1.json
   def show
+  end
+
+  def show_albums
+    request_artist_to_api = get_artist_by_id(params[:artist])
+    p request_artist_to_api
+
+    artist = request_artist_to_api.id
+    albums_response = current_user.albums.find_by(artist: artist) 
+    @albums = albums_response || ""
+    @artist_name = request_artist_to_api.name
   end
 
   # GET /albums/new
@@ -66,6 +78,29 @@ class AlbumsController < ApplicationController
     artists_controller.get_list_of_artists
   end
 
+  def get_artists_by_id(albums)
+    i = 0;
+    list_of_artists = []
+
+    loop{
+      list_of_artists << albums[i].artist
+
+      if i == albums.size - 1
+        break
+      end
+
+      i+=1
+    }
+    
+    artists_controller = ArtistsController.new
+    artists_controller.get_artists_by_id(list_of_artists)
+  end
+
+  def get_artist_by_id(artist_id)
+    artists_controller = ArtistsController.new
+    artists_controller.get_artist_by_id(artist_id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
@@ -75,5 +110,9 @@ class AlbumsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def album_params
       params.require(:album).permit(:artist, :album_name, :year)
+    end
+
+    def test
+      p params
     end
 end

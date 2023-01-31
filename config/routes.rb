@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to:'sessions#destroy'
+  #get 'show_albums', to: 'albums#show_albums'
+  get '/show_albums/:artist/:id', to: 'albums#show_albums', as: 'show_albums'
+
 
   resources :albums
+  resources :artists
   resources :users, only: [:new, :create, :show, :edit, :update]
 end

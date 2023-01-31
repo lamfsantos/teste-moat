@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <h1>Artist List</h1>
+  </div>
+
+  <div class="col-md-8 col-md-offset-2 col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Twitter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @artists.each do |c| %>
+        <tr>
+          <td>
+            <%= c.name %>
+          </td>
+          <td>
+            <%= c.twitter %>
+          </td>
+          <td>
+            <%= link_to 'See Albums', show_albums_path(c.id, current_user), class: 'btn btn-primary' %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

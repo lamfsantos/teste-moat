@@ -30,7 +30,9 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
-    @list_of_artists = get_list_of_artists
+    #@list_of_artists = get_list_of_artists
+    album = Album.find_by(id: params[:id])
+    @artist = get_artist_by_id(album.artist)
   end
 
   # POST /albums or /albums.json

@@ -21,8 +21,8 @@
         <% if @albums.empty? %>
           <tr>
             <td colspan="5" class="text-center">
-              <h3>No albums do show.</h3>
-              <%= link_to 'Click here', new_album_path(current_user) %> to register a new album
+              <h3>No albums to show.</h3>
+              <%= link_to 'Click here', new_album_path(@artist.id, current_user) %> to register a new album
             </td>
           </tr>
         <% else %>

@@ -43,7 +43,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to show_albums_url(@artist.id), success: "Album was successfully created." }
+        format.html { redirect_to show_albums_url(@artist.id, current_user.id), success: "Album was successfully created." }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to show_albums_url(artist.id), success: "Album was successfully updated." }
+        format.html { redirect_to show_albums_url(artist.id, current_user.id), success: "Album was successfully updated." }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -76,7 +76,7 @@ class AlbumsController < ApplicationController
     @album.destroy
     
     respond_to do |format|
-      format.html { redirect_to show_albums_url(artist), success: "Album was successfully destroyed." }
+      format.html { redirect_to show_albums_url(artist, current_user.id), success: "Album was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -126,7 +126,7 @@ class AlbumsController < ApplicationController
 
       unless current_user.role == 2
         respond_to do |format|
-          format.html { redirect_to show_albums_url(artist.id), danger: "You don't have access to this functionalty." }
+          format.html { redirect_to show_albums_url(artist.id, current_user.id), danger: "You don't have access to this functionalty." }
           format.json { render json: @album.errors, status: :unprocessable_entity }
         end
       end

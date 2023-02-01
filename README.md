@@ -11,23 +11,23 @@ Tested on Linux Mint 21.1 and deployed to Heroku on: [Teste Moat](https://teste-
 We need to install ruby, to do so, I used rbenv. You can install using the commands below:
 
 ```
-		$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+	$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 	
-		$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+	$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 
-		$ exec $SHELL
+	$ exec $SHELL
 
-		$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+	$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-    	$echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+	$echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
 
-    	$ exec $SHELL
+	$ exec $SHELL
 ```
 
 Then, to check if it was installed with no errors, run:
 
 ```
-		$ rbenv version
+	$ rbenv version
 ```
 
 
@@ -35,26 +35,26 @@ Then, to check if it was installed with no errors, run:
 
 
 ```
-		$ rbenv install 3.1.3
+	$ rbenv install 3.1.3
 
-		$ ruby -v
+	$ ruby -v
 
-		$ rbenv global 3.1.3
+	$ rbenv global 3.1.3
 
-		$ gem install bundler
+	$ gem install bundler
 
-		$ rbenv rehash
+	$ rbenv rehash
 
-		$ gem install rails -v 7.0.4.2
+	$ gem install rails -v 7.0.4.2
 ```
 
 
 Install the database:
 
 ```
-		sudo apt-get install libmysqlclient-dev
+	sudo apt-get install libmysqlclient-dev
 
-		sudo mysql_secure_installation
+	sudo mysql_secure_installation
 ```
 
 
@@ -63,13 +63,13 @@ Install the database:
 
 
 ```
-		$ bundle install
+	$ bundle install
 
-		$ bundle exec rails db:crate
+	$ bundle exec rails db:crate
 			    
-		$ bundle exec rails db:migrate
+	$ bundle exec rails db:migrate
 
-		$ bundle exec rails db:seed
+	$ bundle exec rails db:seed
 
 ```
 

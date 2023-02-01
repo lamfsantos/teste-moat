@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_30_043001) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "albums", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_01_30_024746) do
+  create_table "albums", charset: "utf8mb3", force: :cascade do |t|
     t.string "artist"
     t.string "album_name"
     t.integer "year"
@@ -24,17 +21,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_30_043001) do
     t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", charset: "utf8mb3", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "full_name"
-    t.string "username"
-    t.string "password_digest"
-    t.integer "role"
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+    t.string "full_name", default: "", null: false
+    t.string "username", default: "", null: false
+    t.string "password_digest", default: "", null: false
+    t.integer "role", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

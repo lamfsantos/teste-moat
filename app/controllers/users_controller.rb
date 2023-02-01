@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 		
 		if @user.save
 			flash[:success] = 'User registered.'
-			redirect_to root_url
+			redirect_to root_url()
 		else
 			render 'new'
 		end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 	def update
 		if current_user.update(user_params)
 			flash[:success] = 'Updated'
-			redirect_to albums_url
+			redirect_to artists_path(current_user)
 		else
 			render 'edit'
 		end

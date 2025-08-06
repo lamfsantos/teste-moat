@@ -19,7 +19,9 @@ We need to install ruby, to do so, I used rbenv. You can install using the comma
 
 	$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-	$echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+	$ echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+
+	$ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
 	$ exec $SHELL
 ```
@@ -52,11 +54,10 @@ Then, to check if it was installed with no errors, run:
 Install the database:
 
 ```
-	sudo apt-get install libmysqlclient-dev
+	$ sudo apt-get install libmysqlclient-dev
 
-	sudo mysql_secure_installation
+	$ sudo mysql_secure_installation
 ```
-
 
 
 ### Install project dependencies and generate the database
@@ -65,7 +66,7 @@ Install the database:
 ```
 	$ bundle install
 
-	$ bundle exec rails db:crate
+	$ bundle exec rails db:create
 			    
 	$ bundle exec rails db:migrate
 

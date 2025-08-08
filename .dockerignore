@@ -1,0 +1,44 @@
+# Ignore OS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore log files and temp files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore test and tmp directories
+/test/
+/tmp/
+!/storage/
+!/tmp/storage/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore public assets
+/public/assets
+/public/packs
+/public/packs-test
+
+# Ignore environment files (except .env)
+.env*
+!.env.example
+
+# Ignore database files
+*.sqlite3
+*.sqlite3-*
+
+# Ignore production files
+/public/system
+coverage/
+.sass-cache/
+.yarn-integrity
